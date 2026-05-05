@@ -16,5 +16,22 @@ export const blogRepository = {
         return await blogsCollection.findOne({_id: new ObjectId(id)})
     },
 
-    async updateBlog() {}
+    async updateBlog(id: string, dto: BlogCreateUpdateDTO) {
+
+        const updateResult = await blogsCollection.updateOne({
+                _id: new ObjectId(id),
+            },
+            {
+                $set: {
+                    name: dto.name,
+                    description: dto.description,
+                    websiteUrl: dto.websiteUrl,
+                }
+            }
+        );
+        if (updateResult.matchedCount === 0) {
+            throw new Error("No blog with this id");
+        }
+        return;
+    }
 }
