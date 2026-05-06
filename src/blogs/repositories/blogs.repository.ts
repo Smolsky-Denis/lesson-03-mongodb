@@ -33,5 +33,15 @@ export const blogRepository = {
             throw new Error("No blog with this id");
         }
         return;
-    }
+    },
+
+    async deleteBlogById(id: string): Promise<boolean> {
+        const deleteResult = await blogsCollection.deleteOne({_id: new ObjectId(id)})
+
+        if(deleteResult.deletedCount === 0) {
+            throw new Error("No blog with this id");
+        }
+
+        return !!deleteResult.deletedCount;
+    },
 }

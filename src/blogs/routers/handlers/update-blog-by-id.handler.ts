@@ -18,7 +18,7 @@ export const updateBlogById = async (req: Request<{id: string}, {}, BlogCreateUp
                 ]
             )
         );
-            return
+            return;
         }
 
         await blogRepository.updateBlog(id, req.body)
