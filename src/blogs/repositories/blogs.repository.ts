@@ -44,4 +44,8 @@ export const blogRepository = {
 
         return !!deleteResult.deletedCount;
     },
+
+    async deleteBlogList() {
+        return await blogsCollection.drop();
+    }
 }
