@@ -11,8 +11,28 @@ import {superAdminGuardMiddleware} from "../../auth/middlewares/super-admin.guar
 export const blogsRouter = Router();
 
 blogsRouter
-    .get('', getBlogList)
-    .post('', superAdminGuardMiddleware, blogInputDtoValidation, createNewBlog)
-    .put("/:id", superAdminGuardMiddleware,blogInputDtoValidation, updateBlogById)
-    .get('/:id', getBlogById)
-    .delete('/:id',superAdminGuardMiddleware, deleteBlogById)
+    .get(
+        '',
+        getBlogList
+    )
+    .post(
+        '',
+        superAdminGuardMiddleware,
+        blogInputDtoValidation,
+        createNewBlog
+    )
+    .put(
+        "/:id",
+        superAdminGuardMiddleware,
+        blogInputDtoValidation,
+        updateBlogById
+    )
+    .get(
+        '/:id',
+        getBlogById
+    )
+    .delete(
+        '/:id',
+        superAdminGuardMiddleware,
+        deleteBlogById
+    )
