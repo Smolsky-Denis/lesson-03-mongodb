@@ -4,13 +4,15 @@ import {createNewPost} from "./handlers/create-new-post.handler";
 import {updatePostById} from "./handlers/update-post-by-id.handler";
 import {getPostById} from "./handlers/get-post-by-id.handler";
 import {deletePostById} from "./handlers/delete-post-by-id.handler";
-
+import {postInputValidation} from "../validation/posts-dto.validation";
+import {superAdminGuardMiddleware} from "../../auth/middlewares/super-admin.guard-middleware";
+import {idValidation} from "../../core/middlewares/validation/id.validation";
 
 export const postsRouter = Router();
 
 postsRouter
     .get('', getPostList)
-    .post('', createNewPost)
-    .put("/:id", updatePostById)
-    .get('/:id', getPostById)
-    .delete('/:id', deletePostById)
+    .post('', superAdminGuardMiddleware, postInputValidation, createNewPost)
+    .put("/:id", idValidation, superAdminGuardMiddleware, postInputValidation, updatePostById)
+    .get('/:id', idValidation, getPostById)
+    .delete('/:id', superAdminGuardMiddleware, idValidation, deletePostById)
