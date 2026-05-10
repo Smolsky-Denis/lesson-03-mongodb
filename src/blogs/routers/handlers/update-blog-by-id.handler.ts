@@ -10,7 +10,7 @@ export const updateBlogById = async (req: Request<{id: string}, {}, BlogCreateUp
         const blogById = await blogRepository.findById(id)
 
         if (!blogById) {
-            res.status(HttpStatus.NotFound).send(createErrorMessages(
+            return res.status(HttpStatus.NotFound).send(createErrorMessages(
                 [
                     {
                         field: id, message: `No blog with id ${id} found.`
@@ -18,13 +18,13 @@ export const updateBlogById = async (req: Request<{id: string}, {}, BlogCreateUp
                 ]
             )
         );
-            return;
+
         }
 
         await blogRepository.updateBlog(id, req.body)
-        res.sendStatus(HttpStatus.NoContent);
+        return res.sendStatus(HttpStatus.NoContent);
 
     } catch (e: unknown){
-        res.sendStatus(HttpStatus.InternalServerError);
+        return res.sendStatus(HttpStatus.InternalServerError);
     }
 }

@@ -6,7 +6,8 @@ import {HttpStatus} from "../../../core/types/http-statuses";
 export const deleteBlogById = async (req: Request<{id: string}>, res: Response) => {
     const id = req.params.id
 
-    return await blogRepository.deleteBlogById(id)
-        ? res.sendStatus(HttpStatus.NoContent)
+    const isDeleted = await blogRepository.deleteBlogById(id);
+
+    return isDeleted ? res.sendStatus(HttpStatus.NoContent)
         : res.sendStatus(HttpStatus.NotFound)
 }

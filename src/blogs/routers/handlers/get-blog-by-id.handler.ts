@@ -11,7 +11,7 @@ export const getBlogById = async (req: Request<{id: string}>, res: Response) => 
     if (!blogById) {
         throw new Error('Blog not found');
     }
-        res.status(HttpStatus.Ok).send(mapToBlogViewModel(blogById))
+        return res.status(HttpStatus.Ok).send(mapToBlogViewModel(blogById))
 
     // }  catch (e) {
     //     res.sendStatus(HttpStatus.InternalServerError);
