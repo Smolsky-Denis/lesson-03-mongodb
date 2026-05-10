@@ -14,5 +14,5 @@ export const createNewBlog = async ( req: Request<{},{}, BlogCreateUpdateDTO>, r
     }
     const blog = await blogRepository.createBlog(newBlog);
 
-    res.status(HttpStatus.Created).send(mapToBlogViewModel(blog));
+    return res.status(HttpStatus.Created).send(mapToBlogViewModel(blog));
 }
