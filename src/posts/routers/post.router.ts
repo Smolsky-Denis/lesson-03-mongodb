@@ -7,12 +7,38 @@ import {deletePostById} from "./handlers/delete-post-by-id.handler";
 import {postInputValidation} from "../validation/posts-dto.validation";
 import {superAdminGuardMiddleware} from "../../auth/middlewares/super-admin.guard-middleware";
 import {idValidation} from "../../core/middlewares/validation/id.validation";
+import {inputValidationMiddleware} from "../../core/middlewares/validation/input-validation.middleware";
 
 export const postsRouter = Router();
 
 postsRouter
-    .get('', getPostList)
-    .post('', superAdminGuardMiddleware, postInputValidation, createNewPost)
-    .put("/:id", idValidation, superAdminGuardMiddleware, postInputValidation, updatePostById)
-    .get('/:id', idValidation, getPostById)
-    .delete('/:id', superAdminGuardMiddleware, idValidation, deletePostById)
+    .get(
+        '',
+        getPostList)
+    .post(
+        '',
+        superAdminGuardMiddleware,
+        postInputValidation,
+        inputValidationMiddleware,
+        createNewPost
+    )
+    .put(
+        "/:id",
+        idValidation,
+        superAdminGuardMiddleware,
+        postInputValidation,
+        inputValidationMiddleware,
+        updatePostById
+    )
+    .get(
+        '/:id',
+        idValidation,
+        inputValidationMiddleware,
+        getPostById)
+    .delete(
+        '/:id',
+        superAdminGuardMiddleware,
+        idValidation,
+        inputValidationMiddleware,
+        deletePostById
+    )
