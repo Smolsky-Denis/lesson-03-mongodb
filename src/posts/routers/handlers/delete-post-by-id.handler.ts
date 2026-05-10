@@ -6,7 +6,9 @@ import {postRepository} from "../../repositories/posts.repository";
 export const deletePostById = async (req: Request<{id: string}>, res: Response) => {
     const id = req.params.id
 
-    await postRepository.deletePostById(id)
+    const isDeleted = await postRepository.deletePostById(id);
+
+    return isDeleted
         ? res.sendStatus(HttpStatus.NoContent)
         : res.sendStatus(HttpStatus.NotFound)
 }

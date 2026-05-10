@@ -14,7 +14,8 @@ export const postsRouter = Router();
 postsRouter
     .get(
         '',
-        getPostList)
+        getPostList
+    )
     .post(
         '',
         superAdminGuardMiddleware,
