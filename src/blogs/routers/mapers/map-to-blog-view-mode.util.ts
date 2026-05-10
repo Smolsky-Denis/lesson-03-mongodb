@@ -9,6 +9,6 @@ export const mapToBlogViewModel = (blog: WithId<BlogDBModel>) : BlogViewModel =>
         description: blog.description,
         websiteUrl: blog.websiteUrl,
         createdAt: blog.createdAt,
-        isMembership: true,
+        isMembership: false,
     }
 }
