@@ -34,7 +34,8 @@ postsRouter
         '/:id',
         idValidation,
         inputValidationMiddleware,
-        getPostById)
+        getPostById
+    )
     .delete(
         '/:id',
         superAdminGuardMiddleware,
