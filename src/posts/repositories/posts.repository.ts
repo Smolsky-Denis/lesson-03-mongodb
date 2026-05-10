@@ -39,10 +39,6 @@ export const postRepository = {
     async deletePostById(id: string): Promise<boolean> {
         const deleteResult = await postsCollection.deleteOne({_id: new ObjectId(id)})
 
-        if(deleteResult.deletedCount === 0) {
-            throw new Error("No blog with this id");
-        }
-
         return !!deleteResult.deletedCount;
     },
 
