@@ -9,5 +9,5 @@ export const getBlogById = async (req: Request<{id: string}>, res: Response) => 
 
     return blogById
         ? res.status(HttpStatus.Ok).send(mapToBlogViewModel(blogById))
-        : res.status(HttpStatus.NotFound)
+        : res.sendStatus(HttpStatus.NotFound)
 }
