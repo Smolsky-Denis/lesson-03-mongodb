@@ -4,17 +4,10 @@ import {HttpStatus} from "../../../core/types/http-statuses";
 import {mapToBlogViewModel} from "../mapers/map-to-blog-view-mode.util";
 
 export const getBlogById = async (req: Request<{id: string}>, res: Response) => {
-    // try {
-        const id: string = req.params.id;
-        const blogById = await blogRepository.findById(id)
+    const id: string = req.params.id;
+    const blogById = await blogRepository.findById(id)
 
-    if (!blogById) {
-        throw new Error('Blog not found');
-    }
-        return res.status(HttpStatus.Ok).send(mapToBlogViewModel(blogById))
-
-    // }  catch (e) {
-    //     res.sendStatus(HttpStatus.InternalServerError);
-    // }
-
+    return blogById
+        ? res.status(HttpStatus.Ok).send(mapToBlogViewModel(blogById))
+        : res.status(HttpStatus.NotFound)
 }
